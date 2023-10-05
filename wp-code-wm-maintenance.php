@@ -2,7 +2,7 @@
 /*
 Plugin Name: Wonder Media - Plugin Update Logger
 Description: Sends plugin updates data to Google Sheet.
-Version: 1.1
+Version: 1.1.1
 Author: Wonder Media
 */
 
