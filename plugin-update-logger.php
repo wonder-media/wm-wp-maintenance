@@ -6,6 +6,19 @@ Version: 1.1
 Author: Wonder Media
 */
 
+// Include the plugin-update-checker library.
+require 'plugin-update-checker/plugin-update-checker.php';
+
+// Initialize the update checker.
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+    'https://github.com/wonder-media/wm-wp-maintenance/',
+    __FILE__,
+    'plugin-update-logger'
+);
+
+// Set the authentication token for the private repository.
+$myUpdateChecker->setAuthentication('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');
+
 function pul_log_plugin_updates( $upgrader_object, $options ) {
     if ( 'update' === $options['action'] && 'plugin' === $options['type'] ) {
         $plugins = get_plugins();
