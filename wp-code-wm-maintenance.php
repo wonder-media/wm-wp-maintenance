@@ -1,21 +1,22 @@
 <?php
 /*
-Plugin Name: Wonder Media - Plugin Update Logger
-Description: Sends plugin updates data to Google Sheet.
-Version: 1.1.1
-Author: Wonder Media
+Plugin Name: WP-Core | WM Maintenance
+Description: Maintain and support custom features on this website.
+Version: 1.1.4
 */
 
 // Include the plugin-update-checker library.
 require 'plugin-update-checker/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-// Initialize the update checker.
-$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-    'https://github.com/wonder-media/wm-wp-maintenance/',
-    __FILE__,
-    'plugin-update-logger'
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://wm-streaming.s3.amazonaws.com/wm-apps/wp-plugins/wp-code-wm-maintenance/update.json',
+	__FILE__, //Full path to the main plugin file or functions.php.
+	'wp-code-wm-maintenance'
 );
 
+
+// Plugin - Log plugins update with version, date, and initiator.
 function pul_log_plugin_updates( $upgrader_object, $options ) {
     if ( 'update' === $options['action'] && 'plugin' === $options['type'] ) {
         $plugins = get_plugins();
