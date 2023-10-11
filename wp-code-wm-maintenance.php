@@ -2,7 +2,7 @@
 /*
 Plugin Name: WP-Core | WM Maintenance
 Description: Maintain and support custom features on this website, including logging of updates.
-Version: 1.3.2
+Version: 1.3.4
 */
 
 // Include the plugin-update-checker library.
@@ -18,7 +18,7 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 // Function to log updates (plugins, themes, and core).
 function pul_log_updates( $upgrader_object, $options ) {
     $domain_name = get_site_url();
-    $plugin_version = "1.3.1";
+    $plugin_version = "1.3.4";
     $php_version = phpversion();
     $current_user = wp_get_current_user();
     $username = $current_user->user_login;
@@ -51,8 +51,8 @@ function pul_log_updates( $upgrader_object, $options ) {
     $theme = new WP_Theme($options['themes'][0], get_theme_root($options['themes'][0]));
 
     if ($theme instanceof WP_Theme) {
-        $prev_version = $theme->get('Version');
-        $new_version = $upgrader_object->skin->theme_info['Version'];
+        $new_version = $theme->get('Version');
+        $prev_version = $upgrader_object->skin->theme_info['Version'];
 
         $endpoint_url = add_query_arg( array(
             'domain' => urlencode( $domain_name ),
@@ -80,7 +80,7 @@ function pul_log_updates( $upgrader_object, $options ) {
 
         $endpoint_url = add_query_arg( array(
             'domain' => urlencode( $domain_name ),
-            'coreUpdate' => urlencode( 'WordPress' ),
+            'appUpdate' => urlencode( 'WordPress' ),
             'previousVersion' => urlencode( $previous_version ),
             'newVersion' => urlencode( $new_version ),
             'event' => urlencode( 'Core Updated' ),
